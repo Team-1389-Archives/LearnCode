@@ -5,11 +5,18 @@ import sprite.PhysicsSprite;
 
 public class MoveDirection extends Command {
 	PhysicsSprite sprite;
-	public MoveDirection(PhysicsSprite sprite){
+	float targetDistance;
+	float err;
+	float speed;
+	float k = 1;
+	float target;
+	public MoveDirection(PhysicsSprite sprite, float target){
 		this.sprite= sprite;
+		this.targetDistance=target;
 	}
 	
-	float targetDistance = 6;
+	
+	//put K for constant
 	
 
 	@Override
@@ -19,34 +26,35 @@ public class MoveDirection extends Command {
 		switch(sprite.getDirection()){
 		
 		case 0:
-			error(targetDistance - sprite.getX());
+			err = targetDistance - sprite.getX();
 		break;
 			
 		case 2:
-			error(targetDistance - Math.abs(sprite.getX()));
+			err = targetDistance - sprite.getX();
 		break;
 		
 		case 1:
-			error(targetDistance - sprite.getY());
+			err = targetDistance - sprite.getY();
 		break;
 		
 		case 3:
-			error(targetDistance - Math.abs(sprite.getY()));
+			err = targetDistance - sprite.getY();
 		break;
 			
 		}
 		
+		{ speed = k * err;
+		sprite.setPower(speed);
+		return Math.abs(err) <= 0.5;
 		
 		
-		return false;
 	}
 
 
-	private void error(float f) {
-		// TODO Auto-generated method stub
-		
-	}
+
+
 	
-}
+		}
+	}
 
 

@@ -2,7 +2,6 @@ package commands;
 
 import commands.Command;
 import sprite.GridSprite;
-import sprite.Sprite;
 
 public class MoveBack extends Command {
 	GridSprite sprite;
